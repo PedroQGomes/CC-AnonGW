@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.Buffer;
 
-public class Worker implements Runnable {
+public class WorkerTcp implements Runnable {
     private Socket cliente; // isto é o socket tcp do cliente
     private AnonBD gw;         // base de dados com os registos
 
 
-    public Worker(Socket c, AnonBD g){
+    public WorkerTcp(Socket c, AnonBD g){
         cliente = c;
         gw = g;
 
