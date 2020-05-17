@@ -26,8 +26,8 @@ public class ListenTcp implements Runnable {
 
 
     private void listen() throws IOException{
-        InetAddress address = InetAddress.getByName("127.0.0.0");
-        ServerSocket sv = new ServerSocket(12345);
+        InetAddress address = InetAddress.getByName("127.0.0.1");
+        ServerSocket sv = new ServerSocket(12345,50,address);
         while(true){
             // aceitar coneçoes tcp dos clientes
             Socket client = sv.accept();
