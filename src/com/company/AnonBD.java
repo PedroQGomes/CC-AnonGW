@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +30,11 @@ public class AnonBD {
     // garantir ordem dos pacotes - talvez com dois maps? um map com um id sessao e um tuple pacotes envidados-por enviar
 
     private List<Socket> logs;  // lista de clientes que tem secao iniciada --TCP
-    private Map <InetAddress, DatagramPacket> udpCon;
+    //private Map <InetAddress, DatagramPacket> udpCon;
+
+    private Map <InetAddress, Map<Integer,String>> udpCon; // TODO: mudar o value to ultimo map
+
+
     private String myIp;
     private List<String> overlay_pears;
     private String targetSvIp;
@@ -43,6 +44,10 @@ public class AnonBD {
         logs = new ArrayList<>();
         overlay_pears = new ArrayList<>(parceiros);
         targetSvIp = sv;
+    }
+
+    public InetAddress getMyIpAdress() throws UnknownHostException {
+        return InetAddress.getByName(myIp);
     }
 
 
@@ -57,7 +62,19 @@ public class AnonBD {
     }
 
 
+    public synchronized int creatNewUdpCon(String data,InetAddress ip){
+        if (!this.udpCon.containsKey(ip)) {
+            this.udpCon.put(ip, new HashMap<>());
+        }
+        this.udpCon.get(ip).put(idsession,data);
+        return idsession++;
 
+    }
+
+    //needs work
+    public synchronized InetAddress getRandomPear() throws UnknownHostException {
+        return InetAddress.getByName("10.3.3.1");
+    }
 
 
 }
