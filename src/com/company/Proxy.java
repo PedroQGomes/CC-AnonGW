@@ -36,7 +36,7 @@ public class Proxy implements Runnable {
 
         } catch (SocketException ignored) {
             ignored.printStackTrace();
-        } catch (Exception e) {
+        } catch (Exception e ) {
             e.printStackTrace();
         } finally {
             try {
