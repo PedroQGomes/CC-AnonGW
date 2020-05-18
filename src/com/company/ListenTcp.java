@@ -1,4 +1,4 @@
-package com.company.models;
+package com.company;
 
 import com.company.AnonBD;
 import com.company.WorkerTcp;
@@ -17,7 +17,11 @@ public class ListenTcp implements Runnable {
 
     @Override
     public void run() {
-        ServerSocket server = new ServerSocket(100);
+        System.out.println("ESTOU AQUI2");
+        ServerSocket server;
+		try {
+			server = new ServerSocket(80);
+		
         while(true) {
          try {
         Socket in = server.accept();
@@ -29,6 +33,11 @@ public class ListenTcp implements Runnable {
         }finally {
         }
     }
+} catch (IOException e1) {
+    // TODO Auto-generated catch block
+    e1.printStackTrace();
+}
+}
 
 
     
