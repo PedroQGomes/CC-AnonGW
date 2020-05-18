@@ -31,6 +31,7 @@ public class Proxy implements Runnable {
             byte[] reply = new byte[4096];
             int bytesRead;
             while ((bytesRead = inputStream.read(reply)) != -1) {
+                System.out.println(reply);
                 outputStream.write(reply, 0, bytesRead);
             }
 

@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class AnonBD {
-
     // todos os pacotes no tunel udp usam a porta 6666 logo temos de saber a que conecao tcp é que pertencem
     private static int idsession =0;
     /*fase inicial

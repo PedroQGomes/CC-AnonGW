@@ -25,7 +25,7 @@ public class WorkerTcp implements Runnable {
 
             String linha;
             while((linha = brClient.readLine()) != null && !linha.equals("quit")){
-                sendPacketToPear(linha);
+                //sendPacketToPear(linha);
 
 
                 linha = brClient.readLine();
@@ -40,7 +40,7 @@ public class WorkerTcp implements Runnable {
 
     }
 
-    private void sendPacketToPear(String data){ // trata de mandar o pedido do cliente pelo canal UDP
+    /*private void sendPacketToPear(String data){ // trata de mandar o pedido do cliente pelo canal UDP
         InetAddress GwPear = null;
         DataUdp dataUdp = null;
         try {
@@ -77,7 +77,7 @@ public class WorkerTcp implements Runnable {
 
 
     }
-
+ */
 
 
 }
