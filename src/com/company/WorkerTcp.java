@@ -65,8 +65,6 @@ public class WorkerTcp implements Runnable {
             DatagramPacket packet = new DatagramPacket(dataInBytes, dataInBytes.length, GwPear, 6666);
             socket.send(packet);
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
