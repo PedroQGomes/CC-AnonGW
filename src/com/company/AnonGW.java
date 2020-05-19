@@ -10,11 +10,11 @@ public class AnonGW {
             Command command = new Command(args);
             command.getCommands();
             List<String> pears = new ArrayList<>();
-            /*AnonBD agw = new AnonBD("127.0.0.0",pears,"10.3.3.1");
+            AnonBD agw = new AnonBD("127.0.0.0",pears,"10.3.3.1");
             
             Thread listenTcp = new Thread(new ListenTcp(agw));
             listenTcp.start();
-            Thread listenUdp = new Thread(new ListenUdp(agw));
+            /* Thread listenUdp = new Thread(new ListenUdp(agw));
             listenUdp.start(); */
            
         }

@@ -2,12 +2,13 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class BaseArgsInfo {
     private static BaseArgsInfo instance = null;
     private List<String> peers;
     private String target_ip;
-    private String port;
+    private int port;
 
     private BaseArgsInfo() {
         peers = new ArrayList<>();
@@ -38,11 +39,16 @@ public class BaseArgsInfo {
         this.target_ip = target_ip;
     }
 
-    public String getPort() {
+    public int getPort() {
         return port;
     }
 
     public void setPort(String port) {
-        this.port = port;
+        this.port = Integer.parseInt(port);
+    }
+
+    public String getRandomPeer() {
+        int randomIndex = ThreadLocalRandom.current().nextInt(0,getPeers().size());
+        return getPeers().get(randomIndex);
     }
 }

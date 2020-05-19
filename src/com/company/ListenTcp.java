@@ -20,13 +20,14 @@ public class ListenTcp implements Runnable {
         System.out.println("ESTOU AQUI2");
         ServerSocket server;
 		try {
-			server = new ServerSocket(80);
+			server = new ServerSocket(BaseArgsInfo.getInstance().getPort());
 		
         while(true) {
          try {
         Socket in = server.accept();
         System.out.println(in.getLocalAddress());
-        startThread(new Connection(in,"www.google.pt",80));
+        startThread(new UDPConnection());
+        //startThread(new Connection(in));
         
         } catch(Exception e) {
         e.printStackTrace();
@@ -41,7 +42,7 @@ public class ListenTcp implements Runnable {
 
 
     
-    public static void startThread(Connection connection) {
+    public static void startThread(UDPConnection connection) {
         Thread t = new Thread(connection);
         t.start();
     }

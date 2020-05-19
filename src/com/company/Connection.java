@@ -7,23 +7,20 @@ import java.util.logging.Logger;
 public class Connection implements Runnable {
 
     private final Socket clientsocket;
-    private final String remoteIp;
-    private final int remotePort;
     private Socket serverConnection = null;
 
    // private static final Logger LOGGER = LoggerFactory.getLogger(Connection.class);
 
-    public Connection(Socket clientsocket, String remoteIp, int remotePort) {
+    public Connection(Socket clientsocket) {
         this.clientsocket = clientsocket;
-        this.remoteIp = remoteIp;
-        this.remotePort = remotePort;
     }
 
     @Override
     public void run() {
        // LOGGER.info("new connection {}:{}", clientsocket.getInetAddress().getHostName(), clientsocket.getPort());
         try {
-            serverConnection = new Socket(remoteIp, remotePort);
+            BaseArgsInfo tmp = BaseArgsInfo.getInstance();
+            serverConnection = new Socket(tmp.getTarget_ip(), tmp.getPort());
         } catch (IOException e) {
             e.printStackTrace();
             return;
