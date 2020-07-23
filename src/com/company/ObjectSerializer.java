@@ -1,19 +1,18 @@
-package com.company;
-
 import java.io.*;
 
 public class ObjectSerializer {
 
     public static byte[] getObjectInByte(Object object) {
         try {
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(2048);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(500);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(object);
             objectOutputStream.close();
             // get the byte array of the object
             byte[] obj= byteArrayOutputStream.toByteArray();
+            byte[] encryptedObj = Encryption.encrypt(obj);
             byteArrayOutputStream.close();
-            return obj;
+            return encryptedObj;
         }catch(IOException e) {
             e.printStackTrace();
         }
@@ -22,15 +21,14 @@ public class ObjectSerializer {
     }
     public static Object getObjectFromByte(byte[] bytes) {
         try {
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
+            byte[] decryptedBuf = Encryption.decrypt(bytes);
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(decryptedBuf);
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);
-             Object tmp =  objectInputStream.readObject();
-             byteArrayInputStream.close();
-             return tmp;
+            Object tmp =  objectInputStream.readObject();
+            byteArrayInputStream.close();
+            return tmp;
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;
